@@ -1,5 +1,11 @@
 {
   "block.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
   "item.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
-  "create.recipe.centrifuge": "Centrifugation"
+  "create.recipe.centrifuge": "Centrifugation",
+
+  "createnewindustry.ponder.mechanical_centrifuge.header": "Processing Items with the Mechanical Centrifuge",
+  "createnewindustry.ponder.mechanical_centrifuge.text_1": "With a Centrifuge and Basin, some Crafting Recipes can be automated",
+  "createnewindustry.ponder.mechanical_centrifuge.text_2": "Available recipes include any Shapeless Crafting Recipe, plus a couple extra ones",
+  "createnewindustry.ponder.mechanical_centrifuge.text_3": "Some of those recipes may require the heat of a Blaze Burner",
+  "createnewindustry.ponder.mechanical_centrifuge.text_4": "The filter slot can be used in case two recipes are conflicting."
 }
