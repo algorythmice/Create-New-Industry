@@ -2,12 +2,13 @@ package fr.algorythmice.createnewindustry.content.kinetics.centrifuge;
 
 import java.util.List;
 import java.util.Optional;
+
+import fr.algorythmice.createnewindustry.AllBlocks;
 import fr.algorythmice.createnewindustry.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
-import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
@@ -18,7 +19,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.item.SmartInventory;
 
-import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.minecraft.world.level.block.Block;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.math.VecHelper;
@@ -82,6 +83,11 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
     public float calculateStressApplied() {
         float impact = 4.0f;
         return impact * Math.abs(getSpeed());
+    }
+
+    @Override
+    protected Block getStressConfigKey() {
+        return AllBlocks.MECHANICAL_CENTRIFUGE.get();
     }
 
     public float getRenderedHeadRotationSpeed(float partialTicks) {

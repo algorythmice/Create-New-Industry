@@ -1,5 +1,6 @@
 package fr.algorythmice.createnewindustry;
 
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -9,6 +10,10 @@ import fr.algorythmice.createnewindustry.content.kinetics.centrifuge.MechanicalC
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.material.MapColor;
 
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipModifier;
+import net.createmod.catnip.lang.FontHelper;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -19,8 +24,15 @@ public class AllBlocks {
             CreateNewIndustry.REGISTRATE;
 
     public static final BlockEntry<MechanicalCentrifugeBlock> MECHANICAL_CENTRIFUGE =
-            REGISTRATE.block("mechanical_centrifuge", MechanicalCentrifugeBlock::new)
+
+            REGISTRATE
+                    .setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
+                            .andThen(TooltipModifier.mapNull(KineticStats.create(item))))
+                    .block("mechanical_centrifuge", MechanicalCentrifugeBlock::new)
+
                     .initialProperties(SharedProperties::stone)
+
+                    .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () ->4f))
                     .properties(p -> p.noOcclusion()
                             .mapColor(MapColor.STONE))
                     .transform(axeOrPickaxe())
@@ -28,6 +40,7 @@ public class AllBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .item(AssemblyOperatorBlockItem::new)
                     .transform(customItemModel())
+
                     .register();
 
     public static void register() {

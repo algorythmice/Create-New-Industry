@@ -41,6 +41,11 @@ public class MechanicalCentrifugeBlock extends KineticBlock implements IBE<Mecha
     }
 
     @Override
+    public boolean hideStressImpact() {
+        return false;
+    }
+
+    @Override
     public Axis getRotationAxis(BlockState state) {
         return Axis.Y;
     }
