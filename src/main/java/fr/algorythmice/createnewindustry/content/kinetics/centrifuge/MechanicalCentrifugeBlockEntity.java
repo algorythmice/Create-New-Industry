@@ -1,8 +1,10 @@
 package fr.algorythmice.createnewindustry.content.kinetics.centrifuge;
 
+import net.minecraft.network.chat.Component;
 import java.util.List;
 import java.util.Optional;
 
+import com.simibubi.create.foundation.utility.CreateLang;
 import fr.algorythmice.createnewindustry.AllBlocks;
 import fr.algorythmice.createnewindustry.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
@@ -19,6 +21,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.item.SmartInventory;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.block.Block;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
@@ -80,9 +83,21 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
     }
 
     @Override
-    public float calculateStressApplied() {
-        float impact = 4.0f;
-        return impact * Math.abs(getSpeed());
+    public boolean addToGoggleTooltip(
+            List<Component> tooltip,
+            boolean isPlayerSneaking) {
+
+        boolean added = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        if (getTheoreticalSpeed() > 0) {
+            CreateLang.translate("tooltip.createnewindustry.wrong_rotation")
+                    .style(ChatFormatting.GOLD)
+                    .forGoggles(tooltip);
+
+            return true;
+        }
+
+        return added;
     }
 
     @Override
@@ -92,6 +107,9 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
 
     public float getRenderedHeadRotationSpeed(float partialTicks) {
         float speed = getSpeed();
+        if (speed >= 0)
+            return 0;
+
         if (running) {
             if (runningTicks < 15) {
                 return speed;
@@ -143,7 +161,14 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
             return;
         }
 
-        float speed = Math.abs(getSpeed());
+        float realSpeed = getSpeed();
+        if (realSpeed > 0) {
+            running = false;
+            runningTicks = 0;
+            return;
+        }
+
+        float speed = Math.abs(realSpeed);
         if (running && level != null) {
             if (level.isClientSide && runningTicks == 20)
                 renderParticles();
@@ -267,6 +292,9 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
     public void startProcessingBasin() {
         if (running && runningTicks <= 20)
             return;
+
+        if (getSpeed() >= 0)
+            return;
         super.startProcessingBasin();
         running = true;
         runningTicks = 0;
@@ -306,7 +334,6 @@ public class MechanicalCentrifugeBlockEntity extends BasinOperatingBlockEntity {
     public void tickAudio() {
         super.tickAudio();
 
-        // SoundEvents.BLOCK_STONE_BREAK
         boolean slow = Math.abs(getSpeed()) < 65;
         if (slow && AnimationTickHolder.getTicks() % 2 == 0)
             return;

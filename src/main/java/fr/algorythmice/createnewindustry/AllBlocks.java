@@ -32,7 +32,7 @@ public class AllBlocks {
 
                     .initialProperties(SharedProperties::stone)
 
-                    .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () ->4f))
+                    .onRegister((block) -> BlockStressValues.IMPACTS.register(block, () ->5f))
                     .properties(p -> p.noOcclusion()
                             .mapColor(MapColor.STONE))
                     .transform(axeOrPickaxe())
@@ -40,7 +40,6 @@ public class AllBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .item(AssemblyOperatorBlockItem::new)
                     .transform(customItemModel())
-
                     .register();
 
     public static void register() {

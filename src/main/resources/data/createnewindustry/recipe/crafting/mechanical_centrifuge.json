@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "create:copper_casing"
+    },
+    "I": {
+      "item": "createnewindustry:centrifuge_blades"
+    },
+    "S": {
+      "item": "create:cogwheel"
+    }
+  },
+  "pattern": [
+    "S",
+    "C",
+    "I"
+  ],
+  "result": {
+    "count": 1,
+    "id": "createnewindustry:mechanical_centrifuge"
+  }
+}

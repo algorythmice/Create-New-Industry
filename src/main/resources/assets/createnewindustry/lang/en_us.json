@@ -3,9 +3,14 @@
   "item.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
   "create.recipe.centrifuge": "Centrifugation",
 
+  "create.tooltip.createnewindustry.wrong_rotation": "Wrong rotation direction",
+
   "createnewindustry.ponder.mechanical_centrifuge.header": "Processing Items with the Mechanical Centrifuge",
   "createnewindustry.ponder.mechanical_centrifuge.text_1": "With a Centrifuge and Basin, some Crafting Recipes can be automated",
-  "createnewindustry.ponder.mechanical_centrifuge.text_2": "Available recipes include any Shapeless Crafting Recipe, plus a couple extra ones",
-  "createnewindustry.ponder.mechanical_centrifuge.text_3": "Some of those recipes may require the heat of a Blaze Burner",
-  "createnewindustry.ponder.mechanical_centrifuge.text_4": "The filter slot can be used in case two recipes are conflicting."
+  "createnewindustry.ponder.mechanical_centrifuge.text_2": "The centrifuge operates only in the correct direction of rotation",
+  "createnewindustry.ponder.mechanical_centrifuge.text_3": "Use the engineer's goggles to check if the centrifuge is spinning in the right direction",
+  "createnewindustry.ponder.mechanical_centrifuge.text_4": "Some of those recipes may require the heat of a Blaze Burner.",
+  "createnewindustry.ponder.mechanical_centrifuge.text_5": "The filter slot can be used in case two recipes are conflicting.",
+  "item.createnewindustry.centrifuge_blades": "Centrifuge Blades",
+  "itemGroup.createnewindustry.base": "Create New Industry"
 }

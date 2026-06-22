@@ -1,3 +1,3 @@
 {
-  "parent": "create:block/mechanical_mixer/item"
+  "parent": "createnewindustry:block/mechanical_centrifuge/item"
 }

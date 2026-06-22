@@ -2,6 +2,7 @@ package fr.algorythmice.createnewindustry.infrastructure.ponder.scenes;
 
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
@@ -38,11 +39,15 @@ public class ProcessingScenes {
         scene.world().showSection(util.select().fromTo(3, 1, 5, 3, 1, 2), Direction.SOUTH);
         scene.idle(20);
 
-        scene.world().setKineticSpeed(util.select().everywhere(), 64);
+        scene.world().setKineticSpeed(util.select().everywhere(), -64);
 
         BlockPos basin = util.grid().at(1, 2, 2);
+        BlockPos centrifuge = util.grid().at(1, 4, 2);
         BlockPos pressPos = util.grid().at(1, 4, 2);
+        BlockPos centrifugehead =  util.grid().at(1, 3, 2);
         Vec3 basinSide = util.vector().blockSurface(basin, Direction.WEST);
+        Vec3 centrifugeside = util.vector().blockSurface(centrifuge, Direction.WEST);
+        Vec3 centrifugeheadside = util.vector().blockSurface(centrifugehead, Direction.WEST);
 
         ItemStack blue = new ItemStack(Items.BLUE_DYE);
         ItemStack red = new ItemStack(Items.RED_DYE);
@@ -71,12 +76,25 @@ public class ProcessingScenes {
         scene.world().createItemOnBelt(util.grid().at(1, 1, 1), Direction.UP, purple);
         scene.idle(30);
 
+        scene.world().setKineticSpeed(util.select().everywhere(), 64);
+
         scene.overlay().showText(80)
-                .pointAt(basinSide)
+                .pointAt(centrifugeheadside)
                 .placeNearTarget()
                 .attachKeyFrame()
-                .text("Available recipes include any Shapeless Crafting Recipe, plus a couple extra ones");
+                .text("The centrifuge operates only in the correct direction of rotation");
         scene.idle(80);
+
+        scene.overlay().showControls(util.vector().blockSurface(util.grid().at(1, 4, 2), Direction.NORTH), Pointing.RIGHT, 50)
+                .withItem(AllItems.GOGGLES.asStack());
+        scene.overlay().showText(80)
+                .pointAt(centrifugeside)
+                .placeNearTarget()
+                .attachKeyFrame()
+                .text("Use the engineer's goggles to check if the centrifuge is spinning in the right direction");
+        scene.idle(80);
+
+        scene.world().setKineticSpeed(util.select().everywhere(), -64);
 
         scene.rotateCameraY(-30);
         scene.idle(10);

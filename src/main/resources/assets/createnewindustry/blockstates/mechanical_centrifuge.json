@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createnewindustry:block/mechanical_centrifuge"
+      "model": "createnewindustry:block/mechanical_centrifuge/block"
     }
   }
 }

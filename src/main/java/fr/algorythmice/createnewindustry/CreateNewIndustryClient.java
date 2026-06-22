@@ -18,9 +18,9 @@ public class CreateNewIndustryClient {
     }
 
     public static void clientInit(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            PonderIndex.addPlugin(new CreateNewIndustryPonderPlugin());
-        });
+        AllPartialModels.init();
+        PonderIndex.addPlugin(new CreateNewIndustryPonderPlugin());
+
     }
 
 }
