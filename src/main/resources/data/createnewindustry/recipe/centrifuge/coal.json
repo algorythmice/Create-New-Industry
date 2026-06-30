@@ -1,0 +1,17 @@
+{
+  "type": "createnewindustry:centrifuge",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "count": 10,
+      "item": "minecraft:coal_block"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.8,
+      "count": 1,
+      "id": "minecraft:diamond"
+    }
+  ]
+}

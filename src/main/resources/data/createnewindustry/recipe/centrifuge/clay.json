@@ -3,18 +3,18 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "tag": "minecraft:sand"
     }
   ],
   "results": [
     {
       "count": 1,
-      "id": "minecraft:gravel"
+      "id": "minecraft:clay_ball"
     },
     {
-      "chance": 0.1,
+      "chance": 0.05,
       "count": 1,
-      "id": "minecraft:flint"
+      "id": "minecraft:gold_nugget"
     }
   ]
 }

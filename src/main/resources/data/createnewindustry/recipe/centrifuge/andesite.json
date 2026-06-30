@@ -3,18 +3,14 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "item": "minecraft:andesite"
     }
   ],
   "results": [
     {
       "count": 1,
+      "chance": 0.5,
       "id": "minecraft:gravel"
-    },
-    {
-      "chance": 0.1,
-      "count": 1,
-      "id": "minecraft:flint"
     }
   ]
 }

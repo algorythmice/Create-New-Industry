@@ -3,16 +3,16 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "item": "minecraft:gravel"
     }
   ],
   "results": [
     {
       "count": 1,
-      "id": "minecraft:gravel"
+      "id": "minecraft:sand"
     },
     {
-      "chance": 0.1,
+      "chance": 0.15,
       "count": 1,
       "id": "minecraft:flint"
     }

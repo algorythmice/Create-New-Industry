@@ -1,5 +1,4 @@
 {
-  "block.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
   "item.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
   "create.recipe.centrifuge": "Centrifugation",
 
@@ -11,6 +10,9 @@
   "createnewindustry.ponder.mechanical_centrifuge.text_3": "Use the engineer's goggles to check if the centrifuge is spinning in the right direction",
   "createnewindustry.ponder.mechanical_centrifuge.text_4": "Some of those recipes may require the heat of a Blaze Burner.",
   "createnewindustry.ponder.mechanical_centrifuge.text_5": "The filter slot can be used in case two recipes are conflicting.",
-  "item.createnewindustry.centrifuge_blades": "Centrifuge Blades",
-  "itemGroup.createnewindustry.base": "Create New Industry"
+  "itemGroup.createnewindustry.base": "Create New Industry",
+  "block.createnewindustry.flywheel": "Flywheel",
+  "block.createnewindustry.flywheel_part": "Flywheel Part",
+  "block.createnewindustry.mechanical_centrifuge": "Mechanical Centrifuge",
+  "item.createnewindustry.centrifuge_blades": "Centrifuge Blades"
 }

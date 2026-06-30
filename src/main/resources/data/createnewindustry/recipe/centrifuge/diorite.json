@@ -3,18 +3,14 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "item": "minecraft:diorite"
     }
   ],
   "results": [
     {
+      "chance": 0.8,
       "count": 1,
-      "id": "minecraft:gravel"
-    },
-    {
-      "chance": 0.1,
-      "count": 1,
-      "id": "minecraft:flint"
+      "id": "minecraft:quartz"
     }
   ]
 }

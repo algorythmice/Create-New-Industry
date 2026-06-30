@@ -7,7 +7,8 @@ public class AllPartialModels {
 
     public static final PartialModel
             MECHANICAL_CENTRIFUGE_POLE = block("mechanical_centrifuge/pole"),
-            MECHANICAL_CENTRIFUGE_HEAD = block("mechanical_centrifuge/head");
+            MECHANICAL_CENTRIFUGE_HEAD = block("mechanical_centrifuge/head"),
+            FLYWHEEL_WHEEL = block("flywheel/block");
 
     private static PartialModel block(String path) {
         return PartialModel.of(CreateNewIndustry.asResource("block/" + path));

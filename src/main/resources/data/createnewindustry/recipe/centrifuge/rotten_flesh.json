@@ -3,18 +3,18 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "item": "minecraft:rotten_flesh"
     }
   ],
   "results": [
     {
       "count": 1,
-      "id": "minecraft:gravel"
+      "id": "minecraft:leather"
     },
     {
       "chance": 0.1,
       "count": 1,
-      "id": "minecraft:flint"
+      "id": "minecraft:bone_meal"
     }
   ]
 }

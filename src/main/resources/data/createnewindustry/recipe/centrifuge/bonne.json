@@ -3,18 +3,18 @@
   "heat_requirement": "none",
   "ingredients": [
     {
-      "tag": "c:stones"
+      "item": "minecraft:bone"
     }
   ],
   "results": [
     {
       "count": 1,
-      "id": "minecraft:gravel"
+      "id": "minecraft:bone_meal"
     },
     {
-      "chance": 0.1,
+      "chance": 0.5,
       "count": 1,
-      "id": "minecraft:flint"
+      "id": "minecraft:bone_meal"
     }
   ]
 }
