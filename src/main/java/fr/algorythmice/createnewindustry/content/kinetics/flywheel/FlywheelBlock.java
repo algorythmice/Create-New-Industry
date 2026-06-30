@@ -4,14 +4,18 @@ import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import fr.algorythmice.createnewindustry.AllBlockEntityTypes;
 import fr.algorythmice.createnewindustry.AllBlocks;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,6 +33,26 @@ public class FlywheelBlock extends RotatedPillarKineticBlock implements IBE<Flyw
         super(properties);
     }
 
+    public Axis getAxisForPlacement(BlockPlaceContext context) {
+        return super.getStateForPlacement(context).getValue(AXIS);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState stateForPlacement = super.getStateForPlacement(context);
+        BlockPos pos = context.getClickedPos();
+        Axis axis = stateForPlacement.getValue(AXIS);
+
+        for (BlockPos offset : getStructureOffsets(axis)) {
+            BlockState occupiedState = context.getLevel()
+                    .getBlockState(pos.offset(offset));
+            if (!occupiedState.canBeReplaced())
+                return null;
+        }
+
+        return stateForPlacement;
+    }
+
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
         super.onPlace(state, level, pos, oldState, moved);
@@ -36,9 +60,8 @@ public class FlywheelBlock extends RotatedPillarKineticBlock implements IBE<Flyw
         if (level.isClientSide)
             return;
 
-        Direction.Axis axis = state.getValue(AXIS);
-
-        createStructure(level, pos, axis);
+        if (!level.getBlockTicks().hasScheduledTick(pos, this))
+            level.scheduleTick(pos, this, 1);
     }
 
     @Override
@@ -57,7 +80,7 @@ public class FlywheelBlock extends RotatedPillarKineticBlock implements IBE<Flyw
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canCreateStructure((Level) level, pos, state.getValue(AXIS));
+        return canCreateStructure(level, pos, state.getValue(AXIS));
     }
 
 
@@ -102,85 +125,51 @@ public class FlywheelBlock extends RotatedPillarKineticBlock implements IBE<Flyw
 
     @Override
     public void tick(BlockState state,
-                     net.minecraft.server.level.ServerLevel level,
+                     ServerLevel level,
                      BlockPos pos,
-                     net.minecraft.util.RandomSource random) {
+                     RandomSource random) {
 
         if (!canCreateStructure(level, pos, state.getValue(AXIS))) {
             level.destroyBlock(pos, true);
+            return;
         }
+
+        createStructure(level, pos, state.getValue(AXIS));
     }
 
     @Override
-    public void neighborChanged(BlockState state,
-                                Level level,
-                                BlockPos pos,
-                                net.minecraft.world.level.block.Block block,
-                                BlockPos fromPos,
-                                boolean moving) {
-
-        super.neighborChanged(state, level, pos, block, fromPos, moving);
-
-        if (!level.isClientSide) {
-            level.scheduleTick(pos, this, 1);
-        }
+    public BlockState updateShape(BlockState state,
+                                  Direction facing,
+                                  BlockState facingState,
+                                  LevelAccessor level,
+                                  BlockPos currentPos,
+                                  BlockPos facingPos) {
+        if (!level.isClientSide()
+                && !level.getBlockTicks().hasScheduledTick(currentPos, this))
+            level.scheduleTick(currentPos, this, 1);
+        return state;
     }
 
     private void removeStructure(Level level, BlockPos center, Direction.Axis axis) {
 
-        for (int a = -1; a <= 1; a++) {
-            for (int b = -1; b <= 1; b++) {
-
-                if (a == 0 && b == 0)
-                    continue;
-
-                BlockPos target;
-
-                switch (axis) {
-                    case X -> target = center.offset(0, a, b);
-                    case Y -> target = center.offset(a, 0, b);
-                    case Z -> target = center.offset(a, b, 0);
-                    default -> throw new IllegalStateException();
-                }
-
-                if (level.getBlockState(target).is(AllBlocks.FLYWHEEL_PART.get()))
-                    level.removeBlock(target, false);
-            }
+        for (BlockPos offset : getStructureOffsets(axis)) {
+            BlockPos target = center.offset(offset);
+            if (level.getBlockState(target).is(AllBlocks.FLYWHEEL_PART.get()))
+                level.removeBlock(target, false);
         }
     }
 
     private boolean canCreateStructure(LevelReader level, BlockPos center, Direction.Axis axis) {
 
-        for (int a = -1; a <= 1; a++) {
-            for (int b = -1; b <= 1; b++) {
+        for (BlockPos offset : getStructureOffsets(axis)) {
+            BlockPos target = center.offset(offset);
+            BlockState state = level.getBlockState(target);
 
-                if (a == 0 && b == 0)
-                    continue;
+            if (state.is(AllBlocks.FLYWHEEL_PART.get()))
+                continue;
 
-                BlockPos target;
-
-                switch (axis) {
-                    case X -> target = center.offset(0, a, b);
-                    case Y -> target = center.offset(a, 0, b);
-                    case Z -> target = center.offset(a, b, 0);
-                    default -> throw new IllegalStateException();
-                }
-
-                BlockState state = level.getBlockState(target);
-
-                if (state.is(AllBlocks.FLYWHEEL_PART.get())) {
-
-                    if (level.getBlockEntity(target) instanceof FlywheelPartBlockEntity be) {
-                        if (!be.getCenter().equals(center))
-                            return false;
-                    }
-
-                    continue;
-                }
-
-                if (!state.canBeReplaced())
-                    return false;
-            }
+            if (!state.canBeReplaced())
+                return false;
         }
 
         return true;
@@ -188,31 +177,40 @@ public class FlywheelBlock extends RotatedPillarKineticBlock implements IBE<Flyw
 
     private void createStructure(Level level, BlockPos center, Direction.Axis axis) {
 
-        for (int a = -1; a <= 1; a++) {
-            for (int b = -1; b <= 1; b++) {
-
-                if (a == 0 && b == 0)
+        for (Direction side : Iterate.directions) {
+            if (side.getAxis() == axis)
+                continue;
+            for (boolean secondary : Iterate.falseAndTrue) {
+                Direction targetSide = secondary ? side.getClockWise(axis) : side;
+                BlockPos structurePos = (secondary ? center.relative(side) : center).relative(targetSide);
+                BlockState occupiedState = level.getBlockState(structurePos);
+                BlockState requiredStructure = AllBlocks.FLYWHEEL_PART.getDefaultState()
+                        .setValue(FlywheelPartBlock.FACING, targetSide.getOpposite());
+                if (occupiedState == requiredStructure)
                     continue;
-
-                BlockPos target;
-
-                switch (axis) {
-
-                    case X -> target = center.offset(0, a, b);
-
-                    case Y -> target = center.offset(a, 0, b);
-
-                    case Z -> target = center.offset(a, b, 0);
-
-                    default -> throw new IllegalStateException();
+                if (!occupiedState.canBeReplaced()) {
+                    level.destroyBlock(center, true);
+                    return;
                 }
-
-                level.setBlock(target, AllBlocks.FLYWHEEL_PART.getDefaultState(), 3);
-                if (level.getBlockEntity(target) instanceof FlywheelPartBlockEntity be) {
-                    be.setCenter(center);
-                }
-
+                level.setBlockAndUpdate(structurePos, requiredStructure);
             }
         }
+    }
+
+    private Iterable<BlockPos> getStructureOffsets(Axis axis) {
+        java.util.List<BlockPos> offsets = new java.util.ArrayList<>(8);
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for (int z = -1; z <= 1; z++) {
+                    if (axis.choose(x, y, z) != 0)
+                        continue;
+                    BlockPos offset = new BlockPos(x, y, z);
+                    if (offset.equals(BlockPos.ZERO))
+                        continue;
+                    offsets.add(offset);
+                }
+            }
+        }
+        return offsets;
     }
 }

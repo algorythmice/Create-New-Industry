@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.algorythmice.createnewindustry.content.kinetics.centrifuge.MechanicalCentrifugeBlock;
 import fr.algorythmice.createnewindustry.content.kinetics.flywheel.FlywheelBlock;
+import fr.algorythmice.createnewindustry.content.kinetics.flywheel.FlywheelBlockItem;
 import fr.algorythmice.createnewindustry.content.kinetics.flywheel.FlywheelPartBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -62,7 +63,7 @@ public class AllBlocks {
                     .transform(axeOrPickaxe())
                     .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, s -> AssetLookup.partialBaseModel(c, p)))
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .item(AssemblyOperatorBlockItem::new)
+                    .item(FlywheelBlockItem::new)
                     .transform(customItemModel())
                     .register();
 
@@ -70,11 +71,13 @@ public class AllBlocks {
             REGISTRATE
                     .block("flywheel_part", FlywheelPartBlock::new)
                     .initialProperties(SharedProperties::stone)
+                    .clientExtension(() -> () -> new FlywheelPartBlock.RenderProperties())
                     .transform(axeOrPickaxe())
                     .properties(p -> p.noOcclusion()
                             .noLootTable())
                     .addLayer(() -> RenderType::cutoutMipped)
-                    .blockstate((c, p) -> {})
+                    .blockstate((c, p) -> p.getVariantBuilder(c.get())
+                            .forAllStatesExcept(BlockStateGen.mapToAir(p), FlywheelPartBlock.FACING))
                     .register();
 
     public static void register() {

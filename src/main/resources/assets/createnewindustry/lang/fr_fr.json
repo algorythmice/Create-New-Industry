@@ -1,0 +1,19 @@
+{
+  "item.createnewindustry.mechanical_centrifuge": "Centrifugeuse mécanique",
+  "create.recipe.centrifuge": "Centrifugation",
+
+  "create.tooltip.createnewindustry.wrong_rotation": "Mauvais sens de rotation",
+
+  "createnewindustry.ponder.mechanical_centrifuge.header": "Traitement des objets avec la centrifugeuse mécanique",
+  "createnewindustry.ponder.mechanical_centrifuge.text_1": "Avec une centrifugeuse et un bassin, certaines recettes de fabrication peuvent être automatisées",
+  "createnewindustry.ponder.mechanical_centrifuge.text_2": "La centrifugeuse fonctionne uniquement dans le bon sens de rotation",
+  "createnewindustry.ponder.mechanical_centrifuge.text_3": "Utilisez les lunettes d’ingénieur pour vérifier si la centrifugeuse tourne dans le bon sens",
+  "createnewindustry.ponder.mechanical_centrifuge.text_4": "Certaines de ces recettes peuvent nécessiter la chaleur d’un brûleur de Blaze.",
+  "createnewindustry.ponder.mechanical_centrifuge.text_5": "L’emplacement de filtre peut être utilisé si deux recettes entrent en conflit.",
+
+  "itemGroup.createnewindustry.base": "Create New Industry",
+  "block.createnewindustry.flywheel": "Volant d'inertie",
+  "block.createnewindustry.flywheel_part": "Pièce de volant d'inertie",
+  "block.createnewindustry.mechanical_centrifuge": "Centrifugeuse mécanique",
+  "item.createnewindustry.centrifuge_blades": "Lames de centrifugeuse"
+}

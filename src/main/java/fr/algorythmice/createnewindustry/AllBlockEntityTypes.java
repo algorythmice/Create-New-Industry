@@ -8,7 +8,6 @@ import fr.algorythmice.createnewindustry.content.kinetics.centrifuge.CentrifugeV
 import fr.algorythmice.createnewindustry.content.kinetics.centrifuge.MechanicalCentrifugeBlockEntity;
 import fr.algorythmice.createnewindustry.content.kinetics.centrifuge.MechanicalCentrifugeRenderer;
 import fr.algorythmice.createnewindustry.content.kinetics.flywheel.FlywheelBlockEntity;
-import fr.algorythmice.createnewindustry.content.kinetics.flywheel.FlywheelPartBlockEntity;
 
 public class AllBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE =
@@ -27,12 +26,6 @@ public class AllBlockEntityTypes {
             .renderer(() -> KineticBlockEntityRenderer::new)
             .validBlocks(AllBlocks.FLYWHEEL)
             .register();
-
-    public static final BlockEntityEntry<FlywheelPartBlockEntity> FLYWHEEL_PART =
-            REGISTRATE
-                    .blockEntity("flywheel_part", FlywheelPartBlockEntity::new)
-                    .validBlocks(AllBlocks.FLYWHEEL_PART)
-                    .register();
 
     public static void register() {
     }

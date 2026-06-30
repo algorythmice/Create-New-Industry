@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "create:andesite_alloy"
+    },
+    "S": {
+      "tag": "c:plates/iron"
+    }
+  },
+  "pattern": [
+    " SS",
+    " C ",
+    "SS "
+  ],
+  "result": {
+    "count": 1,
+    "id": "createnewindustry:centrifuge_blades"
+  }
+}

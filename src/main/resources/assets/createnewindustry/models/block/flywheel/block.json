@@ -1,0 +1,6 @@
+{
+  "parent": "createnewindustry:block/flywheel/textures",
+  "loader": "neoforge:obj",
+  "flip_v": true,
+  "model": "createnewindustry:models/block/flywheel/flywheel.obj"
+}
