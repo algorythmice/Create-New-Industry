@@ -3,6 +3,7 @@
   "create.recipe.centrifuge": "Centrifugation",
 
   "create.tooltip.createnewindustry.wrong_rotation": "Wrong rotation direction",
+  "create.tooltip.createnewindustry.stored_energy": "Stored Energy",
 
   "createnewindustry.ponder.mechanical_centrifuge.header": "Processing Items with the Mechanical Centrifuge",
   "createnewindustry.ponder.mechanical_centrifuge.text_1": "With a Centrifuge and Basin, some Crafting Recipes can be automated",
@@ -10,6 +11,16 @@
   "createnewindustry.ponder.mechanical_centrifuge.text_3": "Use the engineer's goggles to check if the centrifuge is spinning in the right direction",
   "createnewindustry.ponder.mechanical_centrifuge.text_4": "Some of those recipes may require the heat of a Blaze Burner.",
   "createnewindustry.ponder.mechanical_centrifuge.text_5": "The filter slot can be used in case two recipes are conflicting.",
+
+  "createnewindustry.ponder.flywheel.header": "Storing Kinetic Energy",
+  "createnewindustry.ponder.flywheel.text_1": "A Flywheel cannot generate power on its own. It must first be spun by an external kinetic source.",
+  "createnewindustry.ponder.flywheel.text_2": "Once spinning, the Flywheel stores kinetic energy and can keep your machines running after the external power source stops.",
+  "createnewindustry.ponder.flywheel.text_3": "Use Engineer's Goggles to check how much kinetic energy is stored.",
+  "createnewindustry.ponder.flywheel.text_4": "Without external power, the Flywheel gradually slows down as it releases its stored energy.",
+  "createnewindustry.ponder.flywheel.text_5": "Higher stress consumption drains the Flywheel faster.",
+  "createnewindustry.ponder.flywheel.text_6": "Connecting additional Flywheels increases the total stored kinetic energy.",
+
+
   "itemGroup.createnewindustry.base": "Create New Industry",
   "block.createnewindustry.flywheel": "Flywheel",
   "block.createnewindustry.flywheel_part": "Flywheel Part",

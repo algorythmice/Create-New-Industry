@@ -3,11 +3,16 @@ package fr.algorythmice.createnewindustry.content.kinetics.flywheel;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.utility.CreateLang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.List;
 
 public class FlywheelBlockEntity extends GeneratingKineticBlockEntity {
 
@@ -70,6 +75,7 @@ public class FlywheelBlockEntity extends GeneratingKineticBlockEntity {
             isDischarging = false;
             pushNetworkUpdate();
             setChanged();
+            sendData();
             return;
         }
 
@@ -79,11 +85,43 @@ public class FlywheelBlockEntity extends GeneratingKineticBlockEntity {
             updateCooldown = UPDATE_COOLDOWN_TICKS;
             updateGeneratedRotation();
             setChanged();
+            sendData();
         } else if (level.getGameTime() % 20 == 0) {
             setChanged();
+            sendData();
         }
     }
 
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
+        read(tag, registries, true);
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+        boolean added = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        CreateLang.translate("tooltip.createnewindustry.stored_energy")
+                .style(ChatFormatting.GOLD)
+                .forGoggles(tooltip);
+
+        CreateLang.text(EnergyUnit.format(getStoredEnergy()))
+                .style(ChatFormatting.YELLOW)
+                .forGoggles(tooltip);
+
+        return true;
+    }
+
+    private float getStoredEnergy() {
+        float omega = storedOmega * ((float)Math.PI * 2f / 60f); // RPM -> rad/s
+        return 0.5f * INERTIA * omega * omega;
+    }
 
     private void applyFriction() {
         if (storedOmega <= 0f) return;
@@ -100,6 +138,7 @@ public class FlywheelBlockEntity extends GeneratingKineticBlockEntity {
         storedOmega = Math.min(targetOmega, storedOmega + delta);
         storedDirection = (int) Math.signum(getSpeed());
         setChanged();
+        sendData();
     }
 
     private void applyLoadDrain() {
@@ -160,6 +199,7 @@ public class FlywheelBlockEntity extends GeneratingKineticBlockEntity {
         updateGeneratedRotation();
         updateCooldown = UPDATE_COOLDOWN_TICKS;
         setChanged();
+        sendData();
     }
 
     @Override

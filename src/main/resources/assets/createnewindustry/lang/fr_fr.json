@@ -3,6 +3,7 @@
   "create.recipe.centrifuge": "Centrifugation",
 
   "create.tooltip.createnewindustry.wrong_rotation": "Mauvais sens de rotation",
+  "create.tooltip.createnewindustry.stored_energy": "Énergie stockée",
 
   "createnewindustry.ponder.mechanical_centrifuge.header": "Traitement des objets avec la centrifugeuse mécanique",
   "createnewindustry.ponder.mechanical_centrifuge.text_1": "Avec une centrifugeuse et un bassin, certaines recettes de fabrication peuvent être automatisées",
@@ -10,6 +11,14 @@
   "createnewindustry.ponder.mechanical_centrifuge.text_3": "Utilisez les lunettes d’ingénieur pour vérifier si la centrifugeuse tourne dans le bon sens",
   "createnewindustry.ponder.mechanical_centrifuge.text_4": "Certaines de ces recettes peuvent nécessiter la chaleur d’un brûleur de Blaze.",
   "createnewindustry.ponder.mechanical_centrifuge.text_5": "L’emplacement de filtre peut être utilisé si deux recettes entrent en conflit.",
+
+  "createnewindustry.ponder.flywheel.header": "Stocker l'énergie cinétique",
+  "createnewindustry.ponder.flywheel.text_1": "Le volant d'inertie ne produit pas d'énergie par lui-même. Il doit d'abord être entraîné par une source d'énergie cinétique.",
+  "createnewindustry.ponder.flywheel.text_2": "Une fois lancé, le volant d'inertie emmagasine l'énergie cinétique et peut continuer à alimenter vos machines lorsque la source d'énergie s'arrête.",
+  "createnewindustry.ponder.flywheel.text_3": "Utilisez les lunettes d'ingénieur pour connaître la quantité d'énergie cinétique stockée.",
+  "createnewindustry.ponder.flywheel.text_4": "Sans source d'énergie externe, le volant d'inertie ralentit progressivement en restituant l'énergie qu'il a emmagasinée.",
+  "createnewindustry.ponder.flywheel.text_5": "Une consommation de stress élevée vide plus rapidement les réserves du volant d'inertie.",
+  "createnewindustry.ponder.flywheel.text_6": "Reliez plusieurs volants d'inertie pour augmenter la quantité totale d'énergie stockée.",
 
   "itemGroup.createnewindustry.base": "Create New Industry",
   "block.createnewindustry.flywheel": "Volant d'inertie",

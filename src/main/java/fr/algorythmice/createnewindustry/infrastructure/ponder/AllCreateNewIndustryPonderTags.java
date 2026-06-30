@@ -15,5 +15,8 @@ public class AllCreateNewIndustryPonderTags {
         HELPER.addToTag(AllCreatePonderTags.KINETIC_APPLIANCES)
                 .add(AllBlocks.MECHANICAL_CENTRIFUGE);
 
+        HELPER.addToTag(AllCreatePonderTags.KINETIC_APPLIANCES)
+                .add(AllBlocks.FLYWHEEL);
+
     }
 }

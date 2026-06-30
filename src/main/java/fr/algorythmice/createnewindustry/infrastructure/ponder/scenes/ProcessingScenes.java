@@ -20,7 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
 public class ProcessingScenes {
-    public static void mixing(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void centrifuge(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("mechanical_centrifuge", "Processing Items with the Mechanical Centrifuge");
         scene.configureBasePlate(0, 0, 5);
