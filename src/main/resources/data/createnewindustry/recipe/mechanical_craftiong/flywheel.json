@@ -1,0 +1,34 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:brass_sheet"
+    },
+
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "  BBB  ",
+    " BBLBB ",
+    "BBLILBB",
+    "BLIAILB",
+    "BBLILBB",
+    " BBLBB ",
+    "  BBB  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "createnewindustry:flywheel"
+  },
+  "show_notification": false
+}
